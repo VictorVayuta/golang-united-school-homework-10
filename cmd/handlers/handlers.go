@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/gorilla/mux"
+	_ "github.com/stretchr/testify/assert"
 	"io"
 	"net/http"
 	"strconv"

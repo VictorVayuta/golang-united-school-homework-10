@@ -2,13 +2,14 @@ package main
 
 import (
 	"fmt"
+	"github.com/GolangUnited/helloweb/cmd/handlers"
 	"log"
 	"net/http"
 	"os"
 	"strconv"
 
-	"github.com/GolangUnited/helloweb/cmd/handlers"
 	"github.com/gorilla/mux"
+	_ "github.com/stretchr/testify/assert"
 )
 
 func AddHandlers(router *mux.Router) {
