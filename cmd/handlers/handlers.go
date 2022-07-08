@@ -3,39 +3,44 @@ package handlers
 import (
 	"errors"
 	"fmt"
-	"github.com/gorilla/mux"
 	"io"
 	"net/http"
 	"strconv"
+
+	"github.com/gorilla/mux"
 )
 
+//NameParam returns "Hello, {PARAM}"
 func NameParam(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 
-	fmt.Fprintf(w, params["PARAM"]+"Hello, "+"!")
+	fmt.Fprintf(w, "Hello, "+params["PARAM"]+"!")
 }
 
+//BadParam returns status 500
 func BadParam(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusInternalServerError)
 }
 
+//BodyParam returns "I got message:\n {BODY}"
 func BodyParam(w http.ResponseWriter, r *http.Request) {
 	body, err := io.ReadAll(r.Body)
 
 	if err != nil {
-		fmt.Fprintf(w, errors.New("error reading http response").Error())
+		fmt.Fprintf(w, errors.New("Error reading http response").Error())
 		return
 	}
 
 	fmt.Fprintf(w, "I got message:\n"+string(body))
 }
 
+//HeadersParam returns header with key "a+b" and value {SUM}
 func HeadersParam(w http.ResponseWriter, r *http.Request) {
 	headerA := r.Header.Get("a")
 	headerB := r.Header.Get("b")
 
 	if headerA == "" || headerB == "" {
-		fmt.Fprintf(w, errors.New("empty header").Error())
+		fmt.Fprintf(w, errors.New("Empty header!").Error())
 		return
 	}
 
