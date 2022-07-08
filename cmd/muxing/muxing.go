@@ -24,17 +24,19 @@ func Start(host string, port int) {
 	AddHandlers(router)
 
 	log.Println(fmt.Printf("Starting API server on %s:%d\n", host, port))
+
 	if err := http.ListenAndServe(fmt.Sprintf("%s:%d", host, port), router); err != nil {
 		log.Fatal(err)
 	}
 }
 
-//main /** starts program, gets HOST:PORT param and calls Start func.
 func main() {
 	host := os.Getenv("HOST")
 	port, err := strconv.Atoi(os.Getenv("PORT"))
+
 	if err != nil {
 		port = 8081
 	}
+
 	Start(host, port)
 }
