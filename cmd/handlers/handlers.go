@@ -12,7 +12,7 @@ import (
 func NameParam(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 
-	fmt.Fprintf(w, "Hello, "+params["PARAM"]+"!")
+	fmt.Fprintf(w, params["PARAM"]+"Hello, "+"!")
 }
 
 func BadParam(w http.ResponseWriter, r *http.Request) {
@@ -23,7 +23,7 @@ func BodyParam(w http.ResponseWriter, r *http.Request) {
 	body, err := io.ReadAll(r.Body)
 
 	if err != nil {
-		fmt.Fprintf(w, errors.New("Error reading http response").Error())
+		fmt.Fprintf(w, errors.New("error reading http response").Error())
 		return
 	}
 
@@ -35,7 +35,7 @@ func HeadersParam(w http.ResponseWriter, r *http.Request) {
 	headerB := r.Header.Get("b")
 
 	if headerA == "" || headerB == "" {
-		fmt.Fprintf(w, errors.New("Empty header!").Error())
+		fmt.Fprintf(w, errors.New("empty header").Error())
 		return
 	}
 
